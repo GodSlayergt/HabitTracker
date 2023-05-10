@@ -1,0 +1,16 @@
+
+<div class="habit-container text-center">
+  <h2>Register</h2>
+  <div class="habit">
+    <form action="/register" method="POST" class="habit-header mb-4">
+      <div class="form-group">
+        <input type="email" id="email" name="email" required  placeholder="Enter Email"
+          value="<%= typeof email != 'undefined' ? email : '' %>" />
+      </div>
+      <button type="submit" class="btn btn-primary">
+        Register
+      </button>
+    </form>
+
+  </div>
+</div>

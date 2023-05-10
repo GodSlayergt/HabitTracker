@@ -1,0 +1,51 @@
+
+<!-- Habit Container -->
+<a href="/" class="btn">Home</a>
+<div class="habit-container text-center">
+    <h2>Start with a new habit today!</h2>
+    <div class="habit">
+        <form action="/dashboard" method="POST" class="habit-header mb-4">
+            <input type="text" name="content" required>
+            <button type="submit" class="add-btn"><span class="fas fa-plus"></span></button>
+        </form>
+        <i class="fas fa-check-circle" style="color: rgb(143, 233, 58);"></i>
+        -Done&emsp;&emsp;
+        <i class="fas fa-times-circle" style="color: #E53C37;"></i>
+        -Not Done&emsp;&emsp;
+        <i class="fas fa-minus-circle" style="color: gold;"></i>
+        -Unmarked&emsp;&emsp;
+        <ul class="habit-list text-center">
+            <% habits.forEach(details => { %>
+            <li class="habit-list-item">
+                <div class="habit-list-item-name"><%= details.content %></div>
+                <a href="/remove/?id=<%= details._id %>" class="remove">
+                    <i class="far fa-trash-alt"></i>
+                </a>
+                <% days.forEach(day => { let found = false, status = '';
+                details.dates.find(function (item, index) {
+                    if(item.date === day.date)
+                    {
+                        found = true;
+                        status = item.complete;
+                    }
+                });
+                %>
+                <div class="dotw">
+                    <div class="day mt-0"><span><%= day.day + ", " + day.date.slice(-2) %></span></div>
+                    <a href="status-update/?id=<%= details._id %>&date=<%= day.date %>" class="status2 mt-4">
+                        <% if(found && status==='yes'){ %>
+                        <i class="fas fa-check-circle"></i>
+                        <% } else if(found && status==='no'){ %>
+                        <i class="fas fa-times-circle"></i>
+                        <% } else { %>
+                        <i class="fas fa-minus-circle"></i>
+                        <% } %>
+                    </a>
+                </div>
+                <% }) %>
+            </li>
+            <% }) %>
+        </ul>
+        
+    </div>
+</div>
